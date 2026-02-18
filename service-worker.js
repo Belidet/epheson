@@ -64,7 +64,7 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('push', event => {
   const options = {
-    body: event.data ? event.data.text() : 'ὥρα διὰ τὴν σημερινὴν ἀνάγνωσιν!',
+    body: event.data ? event.data.text() : 'Time for today\'s New Testament reading!',
     icon: 'icons/icon-192x192.png',
     badge: 'icons/icon-72x72.png',
     vibrate: [200, 100, 200],
@@ -73,13 +73,13 @@ self.addEventListener('push', event => {
     actions: [
       {
         action: 'open',
-        title: 'Ἄνοιξον'
+        title: 'Open Ephi'
       }
     ]
   };
   
   event.waitUntil(
-    self.registration.showNotification('ΕΦΗ', options)
+    self.registration.showNotification('Ephi', options)
   );
 });
 
@@ -115,8 +115,3 @@ self.addEventListener('sync', event => {
 async function syncProgress() {
   console.log('Syncing progress...');
 }
-
-// Orthodox blessing on service worker activation
-self.addEventListener('activate', () => {
-  console.log('☦ ΕΦΗ Service Worker activated - Κύριε ἐλέησον');
-});
