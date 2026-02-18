@@ -145,14 +145,6 @@ body {
     letter-spacing: 2px;
 }
 
-.app-subtitle-english {
-    font-family: 'Cardo', serif;
-    font-size: 1rem;
-    color: var(--wood-medium);
-    font-style: normal;
-    margin-top: 0.25rem;
-}
-
 /* ===== Iconostasis ===== */
 .iconostasis {
     display: flex;
@@ -183,10 +175,10 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.greek-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    margin-right: 0.5rem;
+.english-text {
+    font-family: 'Cardo', serif;
+    font-size: 1.1rem;
+    margin: 0 0.25rem;
 }
 
 .progress-bar-frame {
@@ -277,12 +269,6 @@ body {
     margin: 0;
 }
 
-.english-text {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-left: auto;
-}
-
 .notification-controls {
     display: flex;
     flex-wrap: wrap;
@@ -301,7 +287,7 @@ body {
     flex-wrap: wrap;
 }
 
-.greek-label {
+.time-picker-container label {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.2rem;
     color: var(--gold);
@@ -562,17 +548,9 @@ body {
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
-.greek-footer {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    color: var(--deep-blue);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
 .english-footer {
     font-family: 'Cardo', serif;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--earth-brown);
     font-style: italic;
 }
