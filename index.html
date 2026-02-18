@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ephi - 52-Day New Testament Reading</title>
+    <title>Ephi - 55-Day New Testament Reading</title>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#D4AF37">
@@ -39,23 +39,41 @@
             </svg>
         </div>
         <h1 class="app-title">Ephi</h1>
-        <p class="app-subtitle">52-Day New Testament Reading Plan</p>
+        <p class="app-subtitle">55-Day New Testament Reading Plan</p>
     </header>
 
     <!-- Progress Bar -->
     <div class="progress-container">
         <div class="progress-stats">
-            <span id="completed-count">0</span>/<span id="total-days">52</span> Days Completed
+            <span id="completed-count">0</span>/<span id="total-days">55</span> Days Completed
         </div>
         <div class="progress-bar">
             <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
         </div>
     </div>
 
-    <!-- Notification Permission Banner -->
-    <div id="notification-banner" class="notification-banner hidden">
-        <p>Receive daily reminders for your reading</p>
-        <button id="enable-notifications" class="btn-notification">Enable Reminders</button>
+    <!-- Notification Settings Panel -->
+    <div id="notification-panel" class="notification-panel">
+        <div class="notification-header">
+            <svg class="bell-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.93 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/>
+            </svg>
+            <h3>Daily Reading Reminder</h3>
+        </div>
+        
+        <div class="notification-controls">
+            <div class="time-picker-container">
+                <label for="reminder-time">Reminder Time:</label>
+                <input type="time" id="reminder-time" value="08:00" class="time-picker">
+            </div>
+            
+            <div class="notification-buttons">
+                <button id="enable-notifications" class="btn-notification">Enable Reminders</button>
+                <button id="disable-notifications" class="btn-notification secondary hidden">Disable</button>
+            </div>
+        </div>
+        
+        <p id="notification-status" class="notification-status">Notifications are disabled</p>
     </div>
 
     <!-- Main Reading List -->
