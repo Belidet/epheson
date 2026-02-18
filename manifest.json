@@ -1,11 +1,11 @@
 {
-  "name": "Ephi - 55-Day New Testament Reading",
-  "short_name": "Ephi",
-  "description": "A guided Bible reading tracker with Eastern Orthodox inspiration. Read the entire New Testament in 55 days.",
+  "name": "ΕΦΗ - Ἡ Καινὴ Διαθήκη ἐν 55 ἡμέραις",
+  "short_name": "ΕΦΗ",
+  "description": "Orthodox Bible reading tracker for the New Testament in 55 days",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#D4AF37",
+  "theme_color": "#8B4513",
   "background_color": "#F5E9D8",
   "icons": [
     {
@@ -59,8 +59,8 @@
   ],
   "shortcuts": [
     {
-      "name": "Today's Reading",
-      "short_name": "Today",
+      "name": "Σήμερον Ἀνάγνωσμα",
+      "short_name": "Σήμερον",
       "description": "Go to today's reading",
       "url": "/#today",
       "icons": [
@@ -71,8 +71,8 @@
       ]
     },
     {
-      "name": "Progress",
-      "short_name": "Progress",
+      "name": "Πρόοδος",
+      "short_name": "Πρόοδος",
       "description": "View your reading progress",
       "url": "/#progress",
       "icons": [
@@ -83,14 +83,7 @@
       ]
     }
   ],
-  "related_applications": [],
-  "prefer_related_applications": false,
-  "categories": ["lifestyle", "education", "books"],
-  "screenshots": [
-    {
-      "src": "screenshots/main-view.jpg",
-      "sizes": "1280x720",
-      "type": "image/jpeg"
-    }
-  ]
+  "categories": ["lifestyle", "education", "books", "religion"],
+  "lang": "el",
+  "dir": "ltr"
 }
