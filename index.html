@@ -6,7 +6,7 @@
     <title>Ephi - 55-Day New Testament Reading</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#D4AF37">
+    <meta name="theme-color" content="#8B4513">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Ephi">
@@ -21,68 +21,112 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Cardo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header with Orthodox Wooden Cross -->
+    <!-- Byzantine Border Top -->
+    <div class="byzantine-border top"></div>
+
+    <!-- Header with Theotokos Icon -->
     <header class="header">
-        <div class="header-icon">
-            <svg class="wooden-cross" viewBox="0 0 100 100" width="70" height="70">
-                <!-- Wood texture background -->
-                <rect x="20" y="20" width="60" height="60" fill="#8B4513" rx="5" ry="5"/>
-                <rect x="22" y="22" width="56" height="56" fill="#A0522D" rx="4" ry="4"/>
+        <div class="icon-mandorla">
+            <svg class="theotokos-icon" viewBox="0 0 200 200" width="100" height="100">
+                <!-- Mandorla (glory cloud) -->
+                <ellipse cx="100" cy="100" rx="45" ry="50" fill="#D4AF37" opacity="0.3"/>
+                <ellipse cx="100" cy="100" rx="40" ry="45" fill="#8B4513" opacity="0.2"/>
                 
-                <!-- Wood grain lines -->
-                <line x1="30" y1="25" x2="30" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
-                <line x1="45" y1="25" x2="45" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
-                <line x1="60" y1="25" x2="60" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
-                <line x1="75" y1="25" x2="75" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
+                <!-- Theotokos (Virgin Mary) -->
+                <circle cx="100" cy="85" r="20" fill="#E6D5B8"/>
+                <path d="M80 105 L120 105 L115 140 L85 140 Z" fill="#8B0000"/>
                 
-                <!-- Orthodox Cross shape -->
-                <rect x="40" y="15" width="20" height="60" fill="#D2691E" rx="3" ry="3"/>
-                <rect x="20" y="40" width="60" height="20" fill="#D2691E" rx="3" ry="3"/>
-                <rect x="45" y="5" width="10" height="20" fill="#D2691E" rx="2" ry="2"/>
-                <rect x="45" y="65" width="10" height="20" fill="#D2691E" rx="2" ry="2"/>
+                <!-- Maphorion (garment) stars -->
+                <circle cx="90" cy="115" r="3" fill="#D4AF37"/>
+                <circle cx="110" cy="115" r="3" fill="#D4AF37"/>
+                <circle cx="100" cy="125" r="3" fill="#D4AF37"/>
                 
-                <!-- Slanted bottom bar (Orthodox style) -->
-                <rect x="35" y="75" width="30" height="8" fill="#D2691E" rx="2" ry="2" transform="rotate(-5 50 79)"/>
+                <!-- Face features -->
+                <circle cx="95" cy="80" r="2" fill="#2C1810"/>
+                <circle cx="105" cy="80" r="2" fill="#2C1810"/>
+                <path d="M95 90 Q100 95 105 90" stroke="#2C1810" stroke-width="1" fill="none"/>
                 
-                <!-- Wood highlights -->
-                <line x1="42" y1="20" x2="42" y2="70" stroke="#F4A460" stroke-width="1" opacity="0.5"/>
-                <line x1="58" y1="20" x2="58" y2="70" stroke="#F4A460" stroke-width="1" opacity="0.5"/>
+                <!-- Christ Child -->
+                <circle cx="100" cy="110" r="8" fill="#E6D5B8"/>
+                <circle cx="97" cy="107" r="1" fill="#2C1810"/>
+                <circle cx="103" cy="107" r="1" fill="#2C1810"/>
+                <path d="M100 112 L100 118" stroke="#2C1810" stroke-width="1"/>
                 
-                <!-- Nail holes -->
-                <circle cx="50" cy="30" r="2" fill="#3A2819"/>
-                <circle cx="50" cy="50" r="2" fill="#3A2819"/>
-                <circle cx="50" cy="70" r="2" fill="#3A2819"/>
+                <!-- Cross halo -->
+                <circle cx="100" cy="85" r="23" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                <line x1="100" y1="70" x2="100" y2="100" stroke="#D4AF37" stroke-width="1"/>
+                <line x1="85" y1="85" x2="115" y2="85" stroke="#D4AF37" stroke-width="1"/>
+                
+                <!-- Greek letters MP ΘΥ (Mother of God) -->
+                <text x="70" y="170" font-family="Cormorant Garamond" font-size="14" fill="#D4AF37">ΜΡ</text>
+                <text x="110" y="170" font-family="Cormorant Garamond" font-size="14" fill="#D4AF37">ΘΥ</text>
             </svg>
         </div>
-        <h1 class="app-title">Ephi</h1>
-        <p class="app-subtitle">55-Day New Testament Reading Plan</p>
+        
+        <h1 class="app-title">ΕΦΗ</h1>
+        <p class="app-subtitle">Ἡ Καινὴ Διαθήκη ἐν 55 ἡμέραις</p>
+        <p class="app-subtitle-english">The New Testament in 55 Days</p>
     </header>
 
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-stats">
-            <span id="completed-count">0</span>/<span id="total-days">55</span> Days Completed
-        </div>
-        <div class="progress-bar">
-            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+    <!-- Iconostasis-inspired Divider -->
+    <div class="iconostasis">
+        <div class="royal-door">
+            <svg viewBox="0 0 100 30" width="100" height="30">
+                <rect x="10" y="5" width="30" height="20" fill="#8B4513" rx="2"/>
+                <rect x="60" y="5" width="30" height="20" fill="#8B4513" rx="2"/>
+                <circle cx="25" cy="15" r="3" fill="#D4AF37"/>
+                <circle cx="75" cy="15" r="3" fill="#D4AF37"/>
+            </svg>
         </div>
     </div>
 
-    <!-- Notification Settings Panel -->
+    <!-- Progress Bar with Icon Frame -->
+    <div class="progress-container">
+        <div class="progress-stats">
+            <span class="greek-text">Ἡμέραι</span>
+            <span id="completed-count">0</span>/<span id="total-days">55</span>
+        </div>
+        <div class="progress-bar-frame">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 0%">
+                    <div class="progress-gold-leaf"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Panel with Icon -->
     <div id="notification-panel" class="notification-panel">
         <div class="notification-header">
-            <svg class="bell-icon" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.93 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/>
+            <svg class="angel-icon" viewBox="0 0 100 100" width="40" height="40">
+                <!-- Angel wings -->
+                <path d="M30 40 Q20 20 35 30 Q30 15 45 25 Q40 10 55 20 Q50 15 65 25 Q60 20 75 30 Q70 25 80 40" fill="#E6D5B8" opacity="0.5"/>
+                <path d="M70 40 Q80 20 65 30 Q70 15 55 25 Q60 10 45 20 Q50 15 35 25 Q40 20 25 30 Q30 25 20 40" fill="#E6D5B8" opacity="0.5"/>
+                
+                <!-- Angel head -->
+                <circle cx="50" cy="45" r="10" fill="#E6D5B8"/>
+                
+                <!-- Halo -->
+                <circle cx="50" cy="45" r="13" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                
+                <!-- Face -->
+                <circle cx="46" cy="43" r="1.5" fill="#2C1810"/>
+                <circle cx="54" cy="43" r="1.5" fill="#2C1810"/>
+                <path d="M48 50 Q50 52 52 50" stroke="#2C1810" stroke-width="1" fill="none"/>
+                
+                <!-- Angel trumpet -->
+                <path d="M60 48 L75 40 L73 43 L60 51 Z" fill="#D4AF37" opacity="0.8"/>
             </svg>
-            <h3>Daily Reading Reminder</h3>
+            <h3 class="greek-text">Ὑπενθύμισις</h3>
+            <span class="english-text">Daily Reminder</span>
         </div>
         
         <div class="notification-controls">
             <div class="time-picker-container">
-                <label for="reminder-time">Reminder Time:</label>
+                <label for="reminder-time" class="greek-label">Ὥρα:</label>
                 <input type="time" id="reminder-time" value="08:00" class="time-picker">
             </div>
             
@@ -95,27 +139,54 @@
         <p id="notification-status" class="notification-status">Notifications are disabled</p>
     </div>
 
-    <!-- Main Reading List -->
+    <!-- Main Reading List with Icon Frames -->
     <main class="reading-list" id="reading-list">
         <!-- Days will be dynamically populated by JavaScript -->
     </main>
 
-    <!-- Footer with Orthodox Cross -->
+    <!-- Footer with Deesis Icon -->
     <footer class="footer">
-        <svg class="orthodox-cross" viewBox="0 0 100 100" width="40" height="40">
-            <!-- Wooden cross in footer -->
-            <rect x="40" y="20" width="20" height="60" fill="#8B4513" rx="3" ry="3"/>
-            <rect x="20" y="40" width="60" height="20" fill="#8B4513" rx="3" ry="3"/>
-            <rect x="45" y="10" width="10" height="20" fill="#8B4513" rx="2" ry="2"/>
-            <rect x="45" y="70" width="10" height="20" fill="#8B4513" rx="2" ry="2"/>
-            <rect x="35" y="80" width="30" height="8" fill="#8B4513" rx="2" ry="2" transform="rotate(-5 50 84)"/>
-            <!-- Gold accents -->
-            <line x1="42" y1="25" x2="42" y2="75" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
-            <line x1="58" y1="25" x2="58" y2="75" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
-        </svg>
-        <p>Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου</p>
-        <p class="small">(I am the light of the world) - John 8:12</p>
+        <div class="deesis">
+            <svg viewBox="0 0 300 100" width="300" height="100">
+                <!-- Christ Pantocrator center -->
+                <circle cx="150" cy="50" r="25" fill="#E6D5B8"/>
+                <rect x="140" y="65" width="20" height="25" fill="#8B0000"/>
+                
+                <!-- Christ halo with cross -->
+                <circle cx="150" cy="50" r="28" fill="none" stroke="#D4AF37" stroke-width="3"/>
+                <line x1="150" y1="30" x2="150" y2="70" stroke="#D4AF37" stroke-width="2"/>
+                <line x1="130" y1="50" x2="170" y2="50" stroke="#D4AF37" stroke-width="2"/>
+                
+                <!-- Christ face -->
+                <circle cx="145" cy="45" r="2" fill="#2C1810"/>
+                <circle cx="155" cy="45" r="2" fill="#2C1810"/>
+                <path d="M145 55 Q150 60 155 55" stroke="#2C1810" stroke-width="1" fill="none"/>
+                
+                <!-- Greek letters IC XC -->
+                <text x="130" y="25" font-family="Cormorant Garamond" font-size="12" fill="#D4AF37">IC</text>
+                <text x="165" y="25" font-family="Cormorant Garamond" font-size="12" fill="#D4AF37">XC</text>
+                
+                <!-- Theotokos left -->
+                <circle cx="100" cy="50" r="18" fill="#E6D5B8"/>
+                <rect x="92" y="63" width="16" height="20" fill="#8B0000"/>
+                <circle cx="100" cy="50" r="21" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                <text x="80" y="80" font-family="Cormorant Garamond" font-size="10" fill="#D4AF37">ΜΡ</text>
+                <text x="105" y="80" font-family="Cormorant Garamond" font-size="10" fill="#D4AF37">ΘΥ</text>
+                
+                <!-- John the Baptist right -->
+                <circle cx="200" cy="50" r="18" fill="#E6D5B8"/>
+                <rect x="192" cy="63" width="16" height="20" fill="#8B4513"/>
+                <circle cx="200" cy="50" r="21" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                <text x="180" y="80" font-family="Cormorant Garamond" font-size="10" fill="#D4AF37">ΙΩ</text>
+                <text x="205" y="80" font-family="Cormorant Garamond" font-size="10" fill="#D4AF37">ΠΡ</text>
+            </svg>
+        </div>
+        <p class="greek-footer">Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου</p>
+        <p class="english-footer">I am the light of the world - John 8:12</p>
     </footer>
+
+    <!-- Byzantine Border Bottom -->
+    <div class="byzantine-border bottom"></div>
 
     <!-- JavaScript -->
     <script src="app.js"></script>
