@@ -11,6 +11,8 @@
     --text-dark: #2C1810;
     --text-light: #FDF5E6;
     --success-green: #2E7D32;
+    --gray-light: #E0E0E0;
+    --gray-medium: #9E9E9E;
 }
 
 /* ===== Base Styles ===== */
@@ -88,7 +90,7 @@ body {
 /* ===== Progress Bar ===== */
 .progress-container {
     max-width: 800px;
-    margin: 2rem auto;
+    margin: 2rem auto 1rem;
     padding: 0 1rem;
 }
 
@@ -136,28 +138,68 @@ body {
     100% { transform: translateX(100%); }
 }
 
-/* ===== Notification Banner ===== */
-.notification-banner {
+/* ===== Notification Panel ===== */
+.notification-panel {
     max-width: 800px;
     margin: 0 auto 2rem;
-    padding: 1rem;
+    padding: 1.5rem;
     background: linear-gradient(135deg, var(--deep-blue), #2A5F8A);
-    border-radius: 10px;
+    border-radius: 15px;
     border: 2px solid var(--gold);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--text-light);
 }
 
-.notification-banner p {
-    color: var(--text-light);
-    font-size: 1rem;
-    margin: 0;
+.notification-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.notification-header h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.bell-icon {
+    fill: var(--gold);
+}
+
+.notification-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.time-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.time-picker-container label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+}
+
+.time-picker {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 2px solid var(--gold);
+    background-color: var(--parchment);
+    color: var(--text-dark);
+    font-family: 'Merriweather', serif;
+    font-size: 1rem;
+}
+
+.notification-buttons {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .btn-notification {
@@ -174,11 +216,26 @@ body {
     border: 2px solid transparent;
 }
 
-.btn-notification:hover {
+.btn-notification.secondary {
     background-color: transparent;
     border-color: var(--gold);
     color: var(--gold);
+}
+
+.btn-notification:hover {
     transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-notification.secondary:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.notification-status {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: center;
 }
 
 .hidden {
@@ -371,6 +428,23 @@ body {
         font-size: 2.5rem;
     }
     
+    .notification-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .time-picker-container {
+        justify-content: center;
+    }
+    
+    .notification-buttons {
+        justify-content: center;
+    }
+    
+    .btn-notification {
+        width: 100%;
+    }
+    
     .day-card {
         flex-wrap: wrap;
     }
@@ -378,15 +452,6 @@ body {
     .day-number {
         min-width: 50px;
         font-size: 1.2rem;
-    }
-    
-    .notification-banner {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .btn-notification {
-        width: 100%;
     }
 }
 
