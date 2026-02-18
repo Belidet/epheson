@@ -1,0 +1,440 @@
+/* ===== Variables ===== */
+:root {
+    --gold: #D4AF37;
+    --gold-light: #F0E68C;
+    --gold-dark: #B8860B;
+    --deep-red: #8B0000;
+    --deep-blue: #1A4B8C;
+    --earth-brown: #5D3A1A;
+    --parchment: #F5E9D8;
+    --parchment-dark: #E8D6B5;
+    --text-dark: #2C1810;
+    --text-light: #FDF5E6;
+    --success-green: #2E7D32;
+}
+
+/* ===== Base Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Merriweather', serif;
+    background-color: var(--parchment);
+    background-image: 
+        linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Header Styles ===== */
+.header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, var(--gold), var(--deep-red), var(--deep-blue), var(--gold));
+}
+
+.header-icon {
+    margin-bottom: 1rem;
+}
+
+.pantocrator-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    animation: glow 4s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3)); }
+    50% { filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.6)); }
+}
+
+.app-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.app-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--deep-blue);
+    font-style: italic;
+}
+
+/* ===== Progress Bar ===== */
+.progress-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.progress-stats {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--deep-blue);
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: var(--parchment-dark);
+    border-radius: 30px;
+    border: 2px solid var(--gold);
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 30px;
+    transition: width 0.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ===== Notification Banner ===== */
+.notification-banner {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--deep-blue), #2A5F8A);
+    border-radius: 10px;
+    border: 2px solid var(--gold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification-banner p {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+}
+
+.btn-notification {
+    background-color: var(--gold);
+    color: var(--text-dark);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-notification:hover {
+    background-color: transparent;
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ===== Reading List ===== */
+.reading-list {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+    flex: 1;
+}
+
+.day-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--gold);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.day-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold), var(--deep-red));
+}
+
+.day-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.2);
+}
+
+.day-card.completed {
+    background-color: rgba(46, 125, 50, 0.1);
+    border-color: var(--success-green);
+}
+
+.day-card.completed::before {
+    background: linear-gradient(180deg, var(--success-green), var(--gold));
+}
+
+.day-card.current {
+    border-color: var(--deep-red);
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.2);
+}
+
+.day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    min-width: 60px;
+    text-align: center;
+    color: var(--deep-blue);
+    border-right: 2px solid var(--gold);
+    padding-right: 1rem;
+}
+
+.day-content {
+    flex: 1;
+}
+
+.day-passage {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.day-description {
+    font-size: 0.9rem;
+    color: var(--earth-brown);
+    font-style: italic;
+}
+
+.checkbox-container {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.5rem;
+    user-select: none;
+    margin-right: 1rem;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.checkbox-container:hover .checkmark {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--gold);
+    border-color: var(--gold-dark);
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 5px;
+    width: 8px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.saint-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="20" fill="%23D4AF37" opacity="0.3"/><circle cx="50" cy="40" r="15" fill="%23D4AF37" opacity="0.6"/><circle cx="50" cy="40" r="10" fill="%23D4AF37"/><rect x="40" y="60" width="20" height="30" fill="%23D4AF37" opacity="0.6"/><circle cx="50" cy="30" r="5" fill="white"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.day-card.completed .saint-icon {
+    opacity: 1;
+}
+
+/* ===== Footer ===== */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--parchment-dark) 0%, var(--parchment) 100%);
+    border-top: 3px solid var(--gold);
+    margin-top: auto;
+}
+
+.orthodox-cross {
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    animation: rotate-slow 20s linear infinite;
+}
+
+@keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--deep-blue);
+    margin-bottom: 0.5rem;
+}
+
+.footer .small {
+    font-size: 0.9rem;
+    color: var(--earth-brown);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 600px) {
+    .app-title {
+        font-size: 2.5rem;
+    }
+    
+    .day-card {
+        flex-wrap: wrap;
+    }
+    
+    .day-number {
+        min-width: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .notification-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .btn-notification {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .day-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .day-number {
+        border-right: none;
+        border-bottom: 2px solid var(--gold);
+        padding-right: 0;
+        padding-bottom: 0.5rem;
+        width: 100%;
+    }
+    
+    .checkbox-container {
+        margin: 0.5rem 0;
+    }
+}
+
+/* ===== Orthodox Decorative Elements ===== */
+.decorative-border {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 10px, var(--deep-red) 10px, var(--deep-red) 20px);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--parchment);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-dark);
+}
