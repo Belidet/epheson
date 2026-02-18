@@ -1,4 +1,4 @@
-// ===== Ephi App - 52-Day New Testament Reading Tracker =====
+// ===== Ephi App - 55-Day New Testament Reading Tracker =====
 
 // Bible data structure
 const bibleData = {
@@ -33,16 +33,14 @@ const bibleData = {
     ]
 };
 
-// Generate 52-day reading plan
+// Generate 55-day reading plan
 function generateReadingPlan() {
-    const totalDays = 52;
+    const totalDays = 55;
     const plan = [];
     let currentBook = 0;
     let currentChapter = 1;
     
-    // User has read Matthew 1-15
-    const completedThroughMatthew15 = true;
-    
+    // Create reading plan
     for (let day = 1; day <= totalDays; day++) {
         let reading = {
             day: day,
@@ -51,8 +49,14 @@ function generateReadingPlan() {
             isCurrent: false
         };
         
-        // Distribute chapters evenly (average ~5 chapters per day for NT)
-        let chaptersPerDay = 4 + Math.floor(Math.random() * 3); // 4-6 chapters per day
+        // Distribute chapters - average ~4.5 chapters per day for NT
+        // First 3 days cover Matthew 1-15 (5 chapters per day)
+        let chaptersPerDay;
+        if (day <= 3) {
+            chaptersPerDay = 5; // First 3 days: 5 chapters each to cover Matthew 1-15
+        } else {
+            chaptersPerDay = 4 + Math.floor(Math.random() * 2); // 4-5 chapters per day for rest
+        }
         
         // Adjust for longer/shorter books
         while (chaptersPerDay > 0 && currentBook < bibleData.books.length) {
@@ -90,49 +94,18 @@ function generateReadingPlan() {
 // Initialize reading plan
 let readingPlan = generateReadingPlan();
 
-// Calculate which days are covered by Matthew 1-15
-function getCompletedDaysFromMatthew1to15() {
-    const completedDays = [];
-    let chaptersRead = 0;
-    
-    for (let day = 0; day < readingPlan.length; day++) {
-        const dayData = readingPlan[day];
-        for (const passage of dayData.passages) {
-            if (passage.book === "Matthew") {
-                if (passage.endChapter <= 15) {
-                    // This entire passage is within Matthew 1-15
-                    if (!completedDays.includes(day)) {
-                        completedDays.push(day);
-                    }
-                } else if (passage.startChapter <= 15 && passage.endChapter > 15) {
-                    // This passage spans across Matthew 15, partial completion
-                    // For simplicity, we'll mark this day as incomplete since it goes beyond 15
-                    // You may want to adjust this logic based on your preference
-                    break;
-                }
-            }
+// Set initial progress state (Matthew 1-15 completed in first 3 days)
+function setInitialProgress() {
+    // Mark first 3 days as completed (Matthew 1-15)
+    for (let i = 0; i < 3; i++) {
+        if (readingPlan[i]) {
+            readingPlan[i].completed = true;
         }
     }
     
-    return completedDays;
-}
-
-// Set initial progress state (Matthew 1-15 completed)
-function setInitialProgress() {
-    const completedDayIndices = getCompletedDaysFromMatthew1to15();
-    
-    completedDayIndices.forEach(dayIndex => {
-        if (readingPlan[dayIndex]) {
-            readingPlan[dayIndex].completed = true;
-        }
-    });
-    
-    // Find first incomplete day and mark as current
-    for (let i = 0; i < readingPlan.length; i++) {
-        if (!readingPlan[i].completed) {
-            readingPlan[i].isCurrent = true;
-            break;
-        }
+    // Set Day 4 as current
+    if (readingPlan[3]) {
+        readingPlan[3].isCurrent = true;
     }
 }
 
@@ -144,12 +117,24 @@ function loadProgress() {
     const savedProgress = localStorage.getItem('ephi-progress');
     if (savedProgress) {
         const completedDays = JSON.parse(savedProgress);
+        
+        // Reset all completed flags
+        readingPlan.forEach(day => day.completed = false);
+        
+        // Apply saved progress
         completedDays.forEach(dayNum => {
             const day = readingPlan.find(d => d.day === dayNum);
             if (day) {
                 day.completed = true;
             }
         });
+        
+        // Ensure first 3 days are always completed (user progress + initial)
+        for (let i = 0; i < 3; i++) {
+            if (readingPlan[i]) {
+                readingPlan[i].completed = true;
+            }
+        }
         
         // Update current day
         updateCurrentDay();
@@ -173,8 +158,8 @@ function updateCurrentDay() {
     // Reset current flag
     readingPlan.forEach(day => day.isCurrent = false);
     
-    // Find first incomplete day
-    for (let i = 0; i < readingPlan.length; i++) {
+    // Find first incomplete day after day 3
+    for (let i = 3; i < readingPlan.length; i++) {
         if (!readingPlan[i].completed) {
             readingPlan[i].isCurrent = true;
             break;
@@ -184,6 +169,12 @@ function updateCurrentDay() {
 
 // Toggle day completion
 function toggleDay(dayNum) {
+    // Don't allow toggling of first 3 days (they're permanently completed)
+    if (dayNum <= 3) {
+        alert("Days 1-3 (Matthew 1-15) are permanently marked as completed.");
+        return;
+    }
+    
     const day = readingPlan.find(d => d.day === dayNum);
     if (day) {
         day.completed = !day.completed;
@@ -241,6 +232,9 @@ function renderReadingList() {
         const dayCard = document.createElement('div');
         dayCard.className = `day-card ${day.completed ? 'completed' : ''} ${day.isCurrent ? 'current' : ''}`;
         
+        // Disable checkbox for first 3 days
+        const checkboxDisabled = day.day <= 3 ? 'disabled' : '';
+        
         dayCard.innerHTML = `
             <div class="day-number">Day ${day.day}</div>
             <div class="day-content">
@@ -249,7 +243,7 @@ function renderReadingList() {
             </div>
             <div class="saint-icon" title="St. ${day.completed ? 'Completed' : 'Incomplete'}"></div>
             <label class="checkbox-container">
-                <input type="checkbox" ${day.completed ? 'checked' : ''} data-day="${day.day}">
+                <input type="checkbox" ${day.completed ? 'checked' : ''} data-day="${day.day}" ${checkboxDisabled}>
                 <span class="checkmark"></span>
             </label>
         `;
@@ -257,8 +251,8 @@ function renderReadingList() {
         container.appendChild(dayCard);
     });
     
-    // Add event listeners to checkboxes
-    document.querySelectorAll('.checkbox-container input').forEach(checkbox => {
+    // Add event listeners to checkboxes (except disabled ones)
+    document.querySelectorAll('.checkbox-container input:not(:disabled)').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             const dayNum = parseInt(e.target.dataset.day);
             toggleDay(dayNum);
@@ -266,73 +260,193 @@ function renderReadingList() {
     });
 }
 
-// Notification handling
-async function setupNotifications() {
-    if ('Notification' in window && 'serviceWorker' in navigator) {
-        const banner = document.getElementById('notification-banner');
-        
-        if (Notification.permission === 'granted') {
-            banner.classList.add('hidden');
-            scheduleDailyNotification();
-        } else if (Notification.permission !== 'denied') {
-            banner.classList.remove('hidden');
-            
-            document.getElementById('enable-notifications').addEventListener('click', async () => {
-                const permission = await Notification.requestPermission();
-                if (permission === 'granted') {
-                    banner.classList.add('hidden');
-                    scheduleDailyNotification();
-                }
-            });
-        }
+// ===== Notification System with Custom Time =====
+
+// Load notification preferences
+function loadNotificationPreferences() {
+    const savedTime = localStorage.getItem('ephi-notification-time');
+    const notificationsEnabled = localStorage.getItem('ephi-notifications-enabled') === 'true';
+    
+    if (savedTime) {
+        document.getElementById('reminder-time').value = savedTime;
+    }
+    
+    updateNotificationUI(notificationsEnabled);
+    return notificationsEnabled;
+}
+
+// Save notification preferences
+function saveNotificationPreferences(time, enabled) {
+    if (time) {
+        localStorage.setItem('ephi-notification-time', time);
+    }
+    localStorage.setItem('ephi-notifications-enabled', enabled);
+}
+
+// Update notification UI based on state
+function updateNotificationUI(enabled) {
+    const enableBtn = document.getElementById('enable-notifications');
+    const disableBtn = document.getElementById('disable-notifications');
+    const statusEl = document.getElementById('notification-status');
+    const timePicker = document.getElementById('reminder-time');
+    
+    if (enabled) {
+        enableBtn.classList.add('hidden');
+        disableBtn.classList.remove('hidden');
+        timePicker.disabled = false;
+        statusEl.textContent = `Notifications are enabled for ${timePicker.value}`;
+        statusEl.style.color = 'var(--gold-light)';
+    } else {
+        enableBtn.classList.remove('hidden');
+        disableBtn.classList.add('hidden');
+        timePicker.disabled = false;
+        statusEl.textContent = 'Notifications are disabled';
+        statusEl.style.color = 'var(--gray-light)';
     }
 }
 
-// Schedule daily notification (simplified version)
-function scheduleDailyNotification() {
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-        // Register service worker
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('Service Worker registered');
-                
-                // Check current time and schedule next notification
-                const now = new Date();
-                const notificationTime = new Date();
-                notificationTime.setHours(8, 0, 0, 0); // 8:00 AM
-                
-                if (now > notificationTime) {
-                    notificationTime.setDate(notificationTime.getDate() + 1);
-                }
-                
-                const timeUntilNotification = notificationTime - now;
-                
-                setTimeout(() => {
-                    registration.showNotification('Ephi - Daily Reading Reminder', {
-                        body: 'Time for today\'s New Testament reading!',
-                        icon: 'icons/icon-192x192.png',
-                        badge: 'icons/icon-72x72.png',
-                        vibrate: [200, 100, 200],
-                        tag: 'daily-reading',
-                        renotify: true
-                    });
-                    
-                    // Schedule next day's notification
-                    setInterval(() => {
-                        registration.showNotification('Ephi - Daily Reading Reminder', {
-                            body: 'Time for today\'s New Testament reading!',
-                            icon: 'icons/icon-192x192.png',
-                            badge: 'icons/icon-72x72.png',
-                            vibrate: [200, 100, 200],
-                            tag: 'daily-reading',
-                            renotify: true
-                        });
-                    }, 24 * 60 * 60 * 1000); // 24 hours
-                }, timeUntilNotification);
-            })
-            .catch(error => {
-                console.error('Service Worker registration failed:', error);
+// Schedule daily notification at specified time
+async function scheduleNotification(timeString) {
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+        console.error('Notifications not supported');
+        return false;
+    }
+    
+    try {
+        const registration = await navigator.serviceWorker.ready;
+        
+        // Parse the time
+        const [hours, minutes] = timeString.split(':').map(Number);
+        
+        // Calculate next notification time
+        const now = new Date();
+        const notificationTime = new Date();
+        notificationTime.setHours(hours, minutes, 0, 0);
+        
+        if (now > notificationTime) {
+            notificationTime.setDate(notificationTime.getDate() + 1);
+        }
+        
+        const timeUntilNotification = notificationTime - now;
+        
+        // Clear any existing notifications
+        await registration.active.postMessage({
+            type: 'CLEAR_NOTIFICATIONS'
+        });
+        
+        // Schedule new notification
+        setTimeout(() => {
+            registration.showNotification('Ephi - Daily Reading Reminder', {
+                body: `Time for today's New Testament reading! Day ${getCurrentDay()} awaits.`,
+                icon: 'icons/icon-192x192.png',
+                badge: 'icons/icon-72x72.png',
+                vibrate: [200, 100, 200],
+                tag: 'daily-reading',
+                renotify: true,
+                actions: [
+                    {
+                        action: 'open',
+                        title: 'Open Ephi'
+                    },
+                    {
+                        action: 'mark-read',
+                        title: 'Mark as Read'
+                    }
+                ]
             });
+            
+            // Schedule next day's notification
+            setInterval(() => {
+                registration.showNotification('Ephi - Daily Reading Reminder', {
+                    body: `Time for today's New Testament reading! Day ${getCurrentDay()} awaits.`,
+                    icon: 'icons/icon-192x192.png',
+                    badge: 'icons/icon-72x72.png',
+                    vibrate: [200, 100, 200],
+                    tag: 'daily-reading',
+                    renotify: true,
+                    actions: [
+                        {
+                            action: 'open',
+                            title: 'Open Ephi'
+                        },
+                        {
+                            action: 'mark-read',
+                            title: 'Mark as Read'
+                        }
+                    ]
+                });
+            }, 24 * 60 * 60 * 1000); // 24 hours
+        }, timeUntilNotification);
+        
+        return true;
+    } catch (error) {
+        console.error('Error scheduling notification:', error);
+        return false;
+    }
+}
+
+// Get current day number
+function getCurrentDay() {
+    const currentDay = readingPlan.find(day => day.isCurrent);
+    return currentDay ? currentDay.day : 4;
+}
+
+// Initialize notifications
+async function setupNotifications() {
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+        document.getElementById('notification-panel').style.display = 'none';
+        return;
+    }
+    
+    const enableBtn = document.getElementById('enable-notifications');
+    const disableBtn = document.getElementById('disable-notifications');
+    const timePicker = document.getElementById('reminder-time');
+    
+    // Load saved preferences
+    const enabled = loadNotificationPreferences();
+    
+    // Enable notifications button
+    enableBtn.addEventListener('click', async () => {
+        const permission = await Notification.requestPermission();
+        
+        if (permission === 'granted') {
+            const selectedTime = timePicker.value;
+            const success = await scheduleNotification(selectedTime);
+            
+            if (success) {
+                saveNotificationPreferences(selectedTime, true);
+                updateNotificationUI(true);
+            }
+        }
+    });
+    
+    // Disable notifications button
+    disableBtn.addEventListener('click', () => {
+        saveNotificationPreferences(timePicker.value, false);
+        updateNotificationUI(false);
+        
+        // Clear scheduled notifications
+        navigator.serviceWorker.ready.then(registration => {
+            registration.active.postMessage({
+                type: 'CLEAR_NOTIFICATIONS'
+            });
+        });
+    });
+    
+    // Time picker change
+    timePicker.addEventListener('change', async () => {
+        if (Notification.permission === 'granted' && 
+            localStorage.getItem('ephi-notifications-enabled') === 'true') {
+            const newTime = timePicker.value;
+            await scheduleNotification(newTime);
+            saveNotificationPreferences(newTime, true);
+            updateNotificationUI(true);
+        }
+    });
+    
+    // If already granted, show current state
+    if (Notification.permission === 'granted' && enabled) {
+        await scheduleNotification(timePicker.value);
     }
 }
 
