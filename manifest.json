@@ -1,6 +1,6 @@
 {
-  "name": "ΕΦΗ - Ἡ Καινὴ Διαθήκη ἐν 55 ἡμέραις",
-  "short_name": "ΕΦΗ",
+  "name": "Ephi - New Testament in 55 Days",
+  "short_name": "Ephi",
   "description": "Orthodox Bible reading tracker for the New Testament in 55 days",
   "start_url": "/",
   "display": "standalone",
@@ -59,8 +59,8 @@
   ],
   "shortcuts": [
     {
-      "name": "Σήμερον Ἀνάγνωσμα",
-      "short_name": "Σήμερον",
+      "name": "Today's Reading",
+      "short_name": "Today",
       "description": "Go to today's reading",
       "url": "/#today",
       "icons": [
@@ -71,8 +71,8 @@
       ]
     },
     {
-      "name": "Πρόοδος",
-      "short_name": "Πρόοδος",
+      "name": "Progress",
+      "short_name": "Progress",
       "description": "View your reading progress",
       "url": "/#progress",
       "icons": [
@@ -83,7 +83,5 @@
       ]
     }
   ],
-  "categories": ["lifestyle", "education", "books", "religion"],
-  "lang": "el",
-  "dir": "ltr"
+  "categories": ["lifestyle", "education", "books", "religion"]
 }
