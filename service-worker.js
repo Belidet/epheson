@@ -1,14 +1,13 @@
-const CACHE_NAME = 'ephi-cache-v2';
+const CACHE_NAME = 'ephi-orthodox-v1';
 const urlsToCache = [
   '/',
   '/index.html',
   '/styles.css',
   '/app.js',
   '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Cardo:wght@400;700&display=swap'
 ];
 
-// Install event - cache assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -19,7 +18,6 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -34,31 +32,25 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Cache hit - return response
         if (response) {
           return response;
         }
         
-        // Clone the request
         const fetchRequest = event.request.clone();
         
         return fetch(fetchRequest).then(response => {
-          // Check if valid response
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
           
-          // Clone the response
           const responseToCache = response.clone();
           
           caches.open(CACHE_NAME)
             .then(cache => {
-              // Don't cache API calls or external resources
               if (event.request.url.indexOf('http') === 0) {
                 cache.put(event.request, responseToCache);
               }
@@ -70,10 +62,9 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// Handle push notifications
 self.addEventListener('push', event => {
   const options = {
-    body: event.data ? event.data.text() : 'Time for today\'s New Testament reading!',
+    body: event.data ? event.data.text() : 'ὥρα διὰ τὴν σημερινὴν ἀνάγνωσιν!',
     icon: 'icons/icon-192x192.png',
     badge: 'icons/icon-72x72.png',
     vibrate: [200, 100, 200],
@@ -82,47 +73,32 @@ self.addEventListener('push', event => {
     actions: [
       {
         action: 'open',
-        title: 'Open Ephi'
-      },
-      {
-        action: 'mark-read',
-        title: 'Mark as Read'
+        title: 'Ἄνοιξον'
       }
     ]
   };
   
   event.waitUntil(
-    self.registration.showNotification('Ephi - Daily Reading Reminder', options)
+    self.registration.showNotification('ΕΦΗ', options)
   );
 });
 
-// Handle notification click
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   
   if (event.action === 'open') {
-    // Open the app
-    event.waitUntil(
-      clients.openWindow('/')
-    );
-  } else if (event.action === 'mark-read') {
-    // This would require more complex logic with IndexedDB
-    // For now, just open the app
     event.waitUntil(
       clients.openWindow('/')
     );
   } else {
-    // Default action - open app
     event.waitUntil(
       clients.openWindow('/')
     );
   }
 });
 
-// Handle messages from main thread
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'CLEAR_NOTIFICATIONS') {
-    // Clear all scheduled notifications
     self.registration.getNotifications().then(notifications => {
       notifications.forEach(notification => notification.close());
     });
@@ -136,8 +112,11 @@ self.addEventListener('sync', event => {
   }
 });
 
-// Function to sync progress when online
 async function syncProgress() {
-  // This would sync with a server if implemented
   console.log('Syncing progress...');
 }
+
+// Orthodox blessing on service worker activation
+self.addEventListener('activate', () => {
+  console.log('☦ ΕΦΗ Service Worker activated - Κύριε ἐλέησον');
+});
