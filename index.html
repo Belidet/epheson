@@ -24,18 +24,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header with Icon -->
+    <!-- Header with Orthodox Wooden Cross -->
     <header class="header">
         <div class="header-icon">
-            <svg class="pantocrator-icon" viewBox="0 0 100 100" width="60" height="60">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#D4AF37" stroke-width="2"/>
-                <circle cx="50" cy="50" r="40" fill="none" stroke="#8B4513" stroke-width="1"/>
-                <path d="M30 35 L70 35 L50 65 Z" fill="none" stroke="#D4AF37" stroke-width="2"/>
-                <circle cx="38" cy="45" r="3" fill="#D4AF37"/>
-                <circle cx="62" cy="45" r="3" fill="#D4AF37"/>
-                <path d="M45 55 Q50 60 55 55" stroke="#D4AF37" stroke-width="2" fill="none"/>
-                <text x="50" y="80" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="#D4AF37">IC</text>
-                <text x="50" y="92" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="#D4AF37">XC</text>
+            <svg class="wooden-cross" viewBox="0 0 100 100" width="70" height="70">
+                <!-- Wood texture background -->
+                <rect x="20" y="20" width="60" height="60" fill="#8B4513" rx="5" ry="5"/>
+                <rect x="22" y="22" width="56" height="56" fill="#A0522D" rx="4" ry="4"/>
+                
+                <!-- Wood grain lines -->
+                <line x1="30" y1="25" x2="30" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
+                <line x1="45" y1="25" x2="45" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
+                <line x1="60" y1="25" x2="60" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
+                <line x1="75" y1="25" x2="75" y2="75" stroke="#6B3410" stroke-width="1" opacity="0.3"/>
+                
+                <!-- Orthodox Cross shape -->
+                <rect x="40" y="15" width="20" height="60" fill="#D2691E" rx="3" ry="3"/>
+                <rect x="20" y="40" width="60" height="20" fill="#D2691E" rx="3" ry="3"/>
+                <rect x="45" y="5" width="10" height="20" fill="#D2691E" rx="2" ry="2"/>
+                <rect x="45" y="65" width="10" height="20" fill="#D2691E" rx="2" ry="2"/>
+                
+                <!-- Slanted bottom bar (Orthodox style) -->
+                <rect x="35" y="75" width="30" height="8" fill="#D2691E" rx="2" ry="2" transform="rotate(-5 50 79)"/>
+                
+                <!-- Wood highlights -->
+                <line x1="42" y1="20" x2="42" y2="70" stroke="#F4A460" stroke-width="1" opacity="0.5"/>
+                <line x1="58" y1="20" x2="58" y2="70" stroke="#F4A460" stroke-width="1" opacity="0.5"/>
+                
+                <!-- Nail holes -->
+                <circle cx="50" cy="30" r="2" fill="#3A2819"/>
+                <circle cx="50" cy="50" r="2" fill="#3A2819"/>
+                <circle cx="50" cy="70" r="2" fill="#3A2819"/>
             </svg>
         </div>
         <h1 class="app-title">Ephi</h1>
@@ -84,12 +103,15 @@
     <!-- Footer with Orthodox Cross -->
     <footer class="footer">
         <svg class="orthodox-cross" viewBox="0 0 100 100" width="40" height="40">
-            <line x1="50" y1="20" x2="50" y2="80" stroke="#D4AF37" stroke-width="4"/>
-            <line x1="20" y1="50" x2="80" y2="50" stroke="#D4AF37" stroke-width="4"/>
-            <line x1="50" y1="35" x2="65" y2="50" stroke="#D4AF37" stroke-width="4"/>
-            <line x1="50" y1="65" x2="65" y2="50" stroke="#D4AF37" stroke-width="4"/>
-            <line x1="50" y1="35" x2="35" y2="50" stroke="#D4AF37" stroke-width="4"/>
-            <line x1="50" y1="65" x2="35" y2="50" stroke="#D4AF37" stroke-width="4"/>
+            <!-- Wooden cross in footer -->
+            <rect x="40" y="20" width="20" height="60" fill="#8B4513" rx="3" ry="3"/>
+            <rect x="20" y="40" width="60" height="20" fill="#8B4513" rx="3" ry="3"/>
+            <rect x="45" y="10" width="10" height="20" fill="#8B4513" rx="2" ry="2"/>
+            <rect x="45" y="70" width="10" height="20" fill="#8B4513" rx="2" ry="2"/>
+            <rect x="35" y="80" width="30" height="8" fill="#8B4513" rx="2" ry="2" transform="rotate(-5 50 84)"/>
+            <!-- Gold accents -->
+            <line x1="42" y1="25" x2="42" y2="75" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+            <line x1="58" y1="25" x2="58" y2="75" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
         </svg>
         <p>Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου</p>
         <p class="small">(I am the light of the world) - John 8:12</p>
