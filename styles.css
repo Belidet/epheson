@@ -6,6 +6,9 @@
     --deep-red: #8B0000;
     --deep-blue: #1A4B8C;
     --earth-brown: #5D3A1A;
+    --wood-light: #D2691E;
+    --wood-medium: #8B4513;
+    --wood-dark: #5D2E0D;
     --parchment: #F5E9D8;
     --parchment-dark: #E8D6B5;
     --text-dark: #2C1810;
@@ -60,14 +63,14 @@ body {
     margin-bottom: 1rem;
 }
 
-.pantocrator-icon {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-    animation: glow 4s ease-in-out infinite;
+.wooden-cross {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    animation: cross-glow 4s ease-in-out infinite;
 }
 
-@keyframes glow {
-    0%, 100% { filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3)); }
-    50% { filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.6)); }
+@keyframes cross-glow {
+    0%, 100% { filter: drop-shadow(0 4px 6px rgba(139, 69, 19, 0.3)); }
+    50% { filter: drop-shadow(0 6px 10px rgba(212, 175, 55, 0.4)); }
 }
 
 .app-title {
@@ -273,7 +276,7 @@ body {
     left: 0;
     width: 5px;
     height: 100%;
-    background: linear-gradient(180deg, var(--gold), var(--deep-red));
+    background: linear-gradient(180deg, var(--gold), var(--wood-medium));
 }
 
 .day-card:hover {
@@ -376,17 +379,18 @@ body {
     display: block;
 }
 
-.saint-icon {
+/* Small wooden cross icon for completed days */
+.cross-icon {
     width: 30px;
     height: 30px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="20" fill="%23D4AF37" opacity="0.3"/><circle cx="50" cy="40" r="15" fill="%23D4AF37" opacity="0.6"/><circle cx="50" cy="40" r="10" fill="%23D4AF37"/><rect x="40" y="60" width="20" height="30" fill="%23D4AF37" opacity="0.6"/><circle cx="50" cy="30" r="5" fill="white"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="40" y="20" width="20" height="60" fill="%23D4AF37" opacity="0.7" rx="3" ry="3"/><rect x="20" y="40" width="60" height="20" fill="%23D4AF37" opacity="0.7" rx="3" ry="3"/><rect x="45" y="10" width="10" height="20" fill="%23D4AF37" opacity="0.7" rx="2" ry="2"/></svg>');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.day-card.completed .saint-icon {
+.day-card.completed .cross-icon {
     opacity: 1;
 }
 
@@ -481,7 +485,7 @@ body {
     left: 0;
     right: 0;
     height: 20px;
-    background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 10px, var(--deep-red) 10px, var(--deep-red) 20px);
+    background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 10px, var(--wood-medium) 10px, var(--wood-medium) 20px);
     opacity: 0.1;
     pointer-events: none;
 }
@@ -496,7 +500,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--gold);
+    background: var(--wood-medium);
     border-radius: 5px;
 }
 
